@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  flask:
+    build: .
+    ports:
+      - 1080:1080
+    volumes:
+      - "./src:/projects"
+    tty: true
+    environment:
+      # FLASK_APP: flaskr
+      FLASK_ENV: development
+      TZ: Asia/Tokyo
+    command: >
+      bash -c "flask run --host 0.0.0.0 --port 1080"
+    restart: always
