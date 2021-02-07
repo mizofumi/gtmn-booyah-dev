@@ -7,16 +7,8 @@ Web ページのソースコードです。気軽にプルリクください。
 ## How to build frontend
 
 We need build frontend before run server.
-
-requirements:
-
-- node v14.15.4
-- npm v6.14.10
-
-run below code
+Run below code at project root.
 
 ```bash
-cd frontend
-npm ci
-npm run build
+docker run -it --rm -v $(pwd)/frontend/:/frontend/ -w /frontend/ node:14.15.4 bash build-frontend.sh
 ```
