@@ -6,6 +6,18 @@
       <img class="header-image" src="http://placehold.jp/400x400.png" />
     </div>
 
+    <button class="bgm-icon" @click="isPlayingBgm ? pauseBgm() : playBgm()">
+      <span :class="{ inactive: !isPlayingBgm }" class="material-icons">
+        volume_up
+      </span>
+      <div>
+        <span :class="{ inactive: !isPlayingBgm }">on</span>/<span
+          :class="{ inactive: isPlayingBgm }"
+          >off</span
+        >
+      </div>
+    </button>
+
     <p class="server-description">
       こちらはjava版、PS4以外の統合版Minecraftで利用できます。<br />
       みんなでワイワイするもより！時には1人で黙々やるのもよし！それぞれの楽しみ方でマナーを守りつつ素敵なマイクラライフを送りましょう！
@@ -27,19 +39,64 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, toRefs } from "vue";
 
 export default defineComponent({
   name: "Home",
+  setup() {
+    const bgm = new Audio();
+    bgm.src = require("@/assets/main-theme.wav");
+    bgm.load();
+    bgm.volume = 0.05;
+
+    const state = reactive({
+      isPlayingBgm: false,
+      bgmAudio: bgm,
+    });
+
+    const playBgm = () => {
+      state.bgmAudio.play().then(() => {
+        state.isPlayingBgm = !state.bgmAudio.paused;
+      });
+    };
+
+    const pauseBgm = () => {
+      state.bgmAudio.pause();
+      state.isPlayingBgm = !state.bgmAudio.paused;
+    };
+
+    return {
+      ...toRefs(state),
+      playBgm,
+      pauseBgm,
+    };
+  },
 });
 </script>
 
 <style lang="scss" scoped>
 .header {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #eeeeee;
+}
+
+.bgm-icon {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 32px;
+  right: 32px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+
+  .inactive {
+    opacity: 0.5;
+  }
 }
 
 .header-image-container {
