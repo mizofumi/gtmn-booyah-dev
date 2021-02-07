@@ -6,4 +6,11 @@ module.exports = {
       title: "GTMNマインクラフト",
     },
   },
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: '@import "@/assets/colors.scss";',
+      },
+    },
+  },
 };
