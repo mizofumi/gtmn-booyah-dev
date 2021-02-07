@@ -41,7 +41,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 export default defineComponent({
-  name: "component-header",
+  name: "components-header",
   setup() {
     const bgm = new Audio();
     bgm.src = require("@/assets/main-theme.wav");
@@ -79,7 +79,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #eeeeee;
+  background-color: $background;
 }
 
 .bgm-icon {
