@@ -1,7 +1,40 @@
-* {
-  box-sizing: border-box;
-}
+<template>
+  <header class="header">
+    <div class="header-image-container">
+      <h1 class="header-title">Welcome to げーたみん Minecraft</h1>
 
+      <img class="header-image" src="http://placehold.jp/400x400.png" />
+    </div>
+
+    <p class="server-description">
+      こちらはjava版、PS4以外の統合版Minecraftで利用できます。<br />
+      みんなでワイワイするもより！時には1人で黙々やるのもよし！それぞれの楽しみ方でマナーを守りつつ素敵なマイクラライフを送りましょう！
+    </p>
+
+    <div class="status">
+      <div class="server-status">
+        <h3>現在サーバー</h3>
+        <span>稼働中</span>
+      </div>
+      <div class="user-status">
+        <h3 class="user-status-header">オンラインユーザー</h3>
+        <div>john doe</div>
+        <div>名無しの権兵衛</div>
+      </div>
+    </div>
+  </header>
+  <article></article>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "Home",
+});
+</script>
+
+<style lang="scss" scoped>
 .header {
   display: flex;
   flex-direction: column;
@@ -81,3 +114,4 @@
   width: 100%;
   flex: 0 0 auto;
 }
+</style>
