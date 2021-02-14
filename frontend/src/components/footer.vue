@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <footer>
     <img class="footer-message" src="@/assets/footer/message.png" />
 
     <img class="footer-logo" src="@/assets/footer/logo.png" />
@@ -7,7 +7,7 @@
     <span>© 2021 げーたみん</span>
 
     <img class="eritoron" src="@/assets/footer/eritoron.png" />
-  </div>
+  </footer>
 </template>
 
 <script lang="ts">
@@ -19,7 +19,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.footer {
+footer {
   position: relative;
   background: url("~@/assets/footer/background.png") center;
   background-size: cover;
