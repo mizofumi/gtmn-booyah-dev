@@ -6,6 +6,9 @@
   />
   <gtm-info />
   <gtm-album />
+  <gtm-rules />
+  <gtm-access />
+  <gtm-footer />
 </template>
 
 <script lang="ts">
@@ -14,6 +17,10 @@ import { defineComponent, onUnmounted, reactive, toRefs } from "vue";
 import GtmHeader from "@/components/header.vue";
 import GtmInfo from "@/components/info.vue";
 import GtmAlbum from "@/components/album.vue";
+import GtmRules from "@/components/rules.vue";
+import GtmAccess from "@/components/access.vue";
+import GtmFooter from "@/components/footer.vue";
+
 import {
   fetchPlayerStatus,
   fetchServerStatus,
@@ -27,6 +34,9 @@ export default defineComponent({
     GtmHeader,
     GtmInfo,
     GtmAlbum,
+    GtmRules,
+    GtmAccess,
+    GtmFooter,
   },
   async setup() {
     const state = reactive({
