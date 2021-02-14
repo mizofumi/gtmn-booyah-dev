@@ -26,22 +26,34 @@
     <div class="status">
       <div class="server-status">
         <h3>現在サーバー</h3>
-        <span>稼働中</span>
-        <span>Ver.x.xx.xxx</span>
+        <span>{{ status }}</span>
+        <span>{{ version }}</span>
       </div>
       <div class="user-status">
         <h3 class="user-status-header">オンラインユーザー</h3>
-        <div>john doe</div>
-        <div>名無しの権兵衛</div>
+        <div v-for="player in playerList" :key="player">{{ player }}</div>
+        <span v-if="playerList.length <= 0">
+          現在オンラインになっているユーザはいません
+        </span>
       </div>
     </div>
   </header>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, PropType, reactive, toRefs } from "vue";
+
+interface Props {
+  version: string;
+}
+
 export default defineComponent({
   name: "components-header",
+  props: {
+    version: { type: String, default: "-" },
+    status: { type: String, default: "-" },
+    playerList: { type: Array as PropType<string[]>, default: [] },
+  },
   setup() {
     const bgm = new Audio();
     bgm.src = require("@/assets/main-theme.wav");
