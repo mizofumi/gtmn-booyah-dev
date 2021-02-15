@@ -1,9 +1,7 @@
 <template>
   <header class="header">
     <div class="header-image-container">
-      <h1 class="header-title">Welcome to げーたみん Minecraft</h1>
-
-      <img class="header-image" src="http://placehold.jp/400x400.png" />
+      <img class="header-image" src="@/assets/header/logo.png" />
     </div>
 
     <button class="bgm-icon" @click="isPlayingBgm ? pauseBgm() : playBgm()">
@@ -26,22 +24,34 @@
     <div class="status">
       <div class="server-status">
         <h3>現在サーバー</h3>
-        <span>稼働中</span>
-        <span>Ver.x.xx.xxx</span>
+        <span class="server-status-health">{{ status }}</span>
+        <span class="server-status-version">Ver.{{ version }}</span>
       </div>
       <div class="user-status">
         <h3 class="user-status-header">オンラインユーザー</h3>
-        <div>john doe</div>
-        <div>名無しの権兵衛</div>
+        <div v-for="player in playerList" :key="player">{{ player }}</div>
+        <span v-if="playerList.length <= 0">
+          現在オンラインのユーザーはいません
+        </span>
       </div>
     </div>
   </header>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, PropType, reactive, toRefs } from "vue";
+
+interface Props {
+  version: string;
+}
+
 export default defineComponent({
   name: "components-header",
+  props: {
+    version: { type: String, default: "-" },
+    status: { type: String, default: "-" },
+    playerList: { type: Array as PropType<string[]>, default: [] },
+  },
   setup() {
     const bgm = new Audio();
     bgm.src = require("@/assets/main-theme.wav");
@@ -79,7 +89,8 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: $background;
+  background: url("~@/assets/header/background.png") center;
+  background-size: cover;
 }
 
 .bgm-icon {
@@ -94,7 +105,7 @@ export default defineComponent({
   background-color: transparent;
 
   .inactive {
-    opacity: 0.5;
+    color: #c0c0c0;
   }
 }
 
@@ -116,11 +127,14 @@ export default defineComponent({
 .header-image {
   width: 400px;
   height: 400px;
+  box-shadow: 1px 1px 3px;
 }
 
 .server-description {
   margin: 16px 32px 0;
+  padding: 32px 24px;
   max-width: 630px;
+  background-color: rgba(white, 0.9);
 }
 
 .status {
@@ -130,6 +144,14 @@ export default defineComponent({
   h3 {
     font-size: 14px;
     font-weight: 400;
+  }
+
+  .user-status-header {
+    width: 100%;
+    flex: 0 0 auto;
+    color: white;
+    font-size: 16px;
+    margin: 0 0 8px;
   }
 }
 
@@ -144,6 +166,11 @@ export default defineComponent({
   > * {
     display: block;
     margin: 8px 0;
+  }
+
+  .server-status-health {
+    font-size: 20px;
+    font-weight: 500;
   }
 }
 
@@ -160,6 +187,10 @@ export default defineComponent({
     margin-right: 8px;
     margin-bottom: 8px;
   }
+
+  > span {
+    color: white;
+  }
 }
 
 .user-status > div::before {
@@ -171,10 +202,5 @@ export default defineComponent({
   top: 4px;
   left: 4px;
   border-radius: 100px;
-}
-
-.user-status-header {
-  width: 100%;
-  flex: 0 0 auto;
 }
 </style>
