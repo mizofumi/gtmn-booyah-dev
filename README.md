@@ -1,3 +1,7 @@
+> :warning: **注意**: このリポジトリはアーカイブされました。  
+こちらのGitLab環境に移行しています。
+https://git.booyah.dev/gatamin/gtmn-booyah-dev
+
 # げーたみん Minecraft
 
 Web ページのソースコードです。気軽にプルリクください。
